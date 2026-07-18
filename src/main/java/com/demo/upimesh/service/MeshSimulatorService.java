@@ -1,10 +1,16 @@
 package com.demo.upimesh.service;
 
 import com.demo.upimesh.model.MeshPacket;
+import com.demo.upimesh.model.Account;
+import com.demo.upimesh.model.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
+import jakarta.annotation.PostConstruct;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,23 +26,50 @@ import java.util.concurrent.ConcurrentHashMap;
  * backend — simulating the moment a phone walks outside and gets 4G.
  */
 @Service
+@DependsOn("demoService")
 public class MeshSimulatorService {
 
     private static final Logger log = LoggerFactory.getLogger(MeshSimulatorService.class);
 
+    @Autowired
+    private AccountRepository accountRepo;
+
     private final Map<String, VirtualDevice> devices = new ConcurrentHashMap<>();
 
-    public MeshSimulatorService() {
+    @PostConstruct
+    public void init() {
         // Default scenario: 4 offline phones in a basement, 1 phone outside with 4G
         seedDefaultDevices();
     }
 
     private void seedDefaultDevices() {
-        devices.put("phone-alice",   new VirtualDevice("phone-alice",   false));
-        devices.put("phone-stranger1", new VirtualDevice("phone-stranger1", false));
-        devices.put("phone-stranger2", new VirtualDevice("phone-stranger2", false));
-        devices.put("phone-stranger3", new VirtualDevice("phone-stranger3", false));
-        devices.put("phone-bridge",  new VirtualDevice("phone-bridge",  true));
+        devices.put("phone-alice",  new VirtualDevice("phone-alice",  false));
+        devices.put("phone-bob",    new VirtualDevice("phone-bob",    false));
+        devices.put("phone-carol",  new VirtualDevice("phone-carol",  false));
+        devices.put("phone-dave",   new VirtualDevice("phone-dave",   false));
+        devices.put("phone-bridge", new VirtualDevice("phone-bridge", true));
+        
+        syncDeviceBalances();
+    }
+
+    public void syncDeviceBalances() {
+        BigDecimal aliceBal = accountRepo.findById("alice@demo")
+                .map(Account::getBalance).orElse(new BigDecimal("5000.00"));
+        devices.get("phone-alice").setLocalOfflineBalance(aliceBal);
+
+        BigDecimal bobBal = accountRepo.findById("bob@demo")
+                .map(Account::getBalance).orElse(new BigDecimal("1000.00"));
+        devices.get("phone-bob").setLocalOfflineBalance(bobBal);
+
+        BigDecimal carolBal = accountRepo.findById("carol@demo")
+                .map(Account::getBalance).orElse(new BigDecimal("2500.00"));
+        devices.get("phone-carol").setLocalOfflineBalance(carolBal);
+
+        BigDecimal daveBal = accountRepo.findById("dave@demo")
+                .map(Account::getBalance).orElse(new BigDecimal("500.00"));
+        devices.get("phone-dave").setLocalOfflineBalance(daveBal);
+
+        devices.get("phone-bridge").setLocalOfflineBalance(BigDecimal.ZERO);
     }
 
     public Collection<VirtualDevice> getDevices() {
@@ -50,12 +83,18 @@ public class MeshSimulatorService {
     /**
      * Sender drops a packet into the mesh by handing it to their own device.
      */
-    public void inject(String senderDeviceId, MeshPacket packet) {
+    public void inject(String senderDeviceId, MeshPacket packet, BigDecimal amount) {
         VirtualDevice sender = devices.get(senderDeviceId);
         if (sender == null) throw new IllegalArgumentException("Unknown device: " + senderDeviceId);
+        
+        if (sender.getLocalOfflineBalance().compareTo(amount) < 0) {
+            throw new IllegalArgumentException("Insufficient offline wallet balance on " + senderDeviceId);
+        }
+        
+        sender.setLocalOfflineBalance(sender.getLocalOfflineBalance().subtract(amount));
         sender.hold(packet);
-        log.info("Packet {} injected at {} (TTL={})",
-                packet.getPacketId().substring(0, 8), senderDeviceId, packet.getTtl());
+        log.info("Packet {} injected at {} (TTL={}, Wallet Remaining: ₹{})",
+                packet.getPacketId().substring(0, 8), senderDeviceId, packet.getTtl(), sender.getLocalOfflineBalance());
     }
 
     /**
@@ -124,6 +163,7 @@ public class MeshSimulatorService {
 
     public void resetMesh() {
         devices.values().forEach(VirtualDevice::clear);
+        syncDeviceBalances();
     }
 
     public record GossipResult(int transfers, Map<String, Integer> deviceCounts) {}
