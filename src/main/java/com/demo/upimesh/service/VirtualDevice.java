@@ -44,6 +44,14 @@ public class VirtualDevice {
         return heldPackets.size();
     }
 
+    public BigDecimal getLocalOfflineBalance() {
+        return localOfflineBalance;
+    }
+
+    public void setLocalOfflineBalance(BigDecimal localOfflineBalance) {
+        this.localOfflineBalance = localOfflineBalance;
+    }
+
     public void clear() {
         heldPackets.clear();
     }
