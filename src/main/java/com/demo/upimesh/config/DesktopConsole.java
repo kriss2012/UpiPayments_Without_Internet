@@ -99,6 +99,12 @@ public class DesktopConsole {
         btnLaunch.setBackground(sbiCerulean);
         btnLaunch.setForeground(Color.WHITE);
         btnLaunch.setFocusPainted(false);
+        btnLaunch.setContentAreaFilled(false);
+        btnLaunch.setOpaque(true);
+        btnLaunch.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(sbiCerulean.darker(), 1),
+                BorderFactory.createEmptyBorder(8, 15, 8, 15)
+        ));
         btnLaunch.addActionListener((ActionEvent e) -> {
             try {
                 Desktop.getDesktop().browse(new URI("http://localhost:8080"));
@@ -113,6 +119,12 @@ public class DesktopConsole {
         btnShutdown.setBackground(new Color(220, 38, 38)); // Red color
         btnShutdown.setForeground(Color.WHITE);
         btnShutdown.setFocusPainted(false);
+        btnShutdown.setContentAreaFilled(false);
+        btnShutdown.setOpaque(true);
+        btnShutdown.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(153, 27, 27), 1),
+                BorderFactory.createEmptyBorder(8, 15, 8, 15)
+        ));
         btnShutdown.addActionListener((ActionEvent e) -> {
             System.exit(0);
         });
