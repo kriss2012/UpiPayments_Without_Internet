@@ -812,11 +812,15 @@
                 </svg>
 
                 <!-- Phone Nodes (positioned absolutely) -->
-                <!-- phone-alice (Sender) -->
+                <!-- phone-alice -->
                 <div class="device-node" id="card-phone-alice" style="top: 50%; left: 16%;">
                     <div class="node-header">
                         <span class="node-name">📲 Alice Phone</span>
                         <span class="node-badge offline">Offline</span>
+                    </div>
+                    <div class="node-packet-badge" style="font-size: 10px; color: var(--sbi-cerulean); border-top: none; padding-top: 0; margin-bottom: 2px;">
+                        <span>Wallet:</span>
+                        <span style="font-weight: 700; color: var(--sbi-green);" id="wallet-phone-alice">₹5,000.00</span>
                     </div>
                     <div class="node-packet-badge">
                         <span>Mesh Queue</span>
@@ -825,43 +829,55 @@
                     <div class="node-packet-list" id="packets-phone-alice"></div>
                 </div>
 
-                <!-- phone-stranger1 -->
-                <div class="device-node" id="card-phone-stranger1" style="top: 20%; left: 45%;">
+                <!-- phone-bob -->
+                <div class="device-node" id="card-phone-bob" style="top: 20%; left: 45%;">
                     <div class="node-header">
-                        <span class="node-name">📱 Stranger 1</span>
+                        <span class="node-name">📱 Bob Phone</span>
                         <span class="node-badge offline">Offline</span>
+                    </div>
+                    <div class="node-packet-badge" style="font-size: 10px; color: var(--sbi-cerulean); border-top: none; padding-top: 0; margin-bottom: 2px;">
+                        <span>Wallet:</span>
+                        <span style="font-weight: 700; color: var(--sbi-green);" id="wallet-phone-bob">₹1,000.00</span>
                     </div>
                     <div class="node-packet-badge">
                         <span>Mesh Queue</span>
-                        <span class="node-packet-count" id="count-phone-stranger1">0</span>
+                        <span class="node-packet-count" id="count-phone-bob">0</span>
                     </div>
-                    <div class="node-packet-list" id="packets-phone-stranger1"></div>
+                    <div class="node-packet-list" id="packets-phone-bob"></div>
                 </div>
 
-                <!-- phone-stranger2 -->
-                <div class="device-node" id="card-phone-stranger2" style="top: 80%; left: 45%;">
+                <!-- phone-carol -->
+                <div class="device-node" id="card-phone-carol" style="top: 80%; left: 45%;">
                     <div class="node-header">
-                        <span class="node-name">📱 Stranger 2</span>
+                        <span class="node-name">📱 Carol Phone</span>
                         <span class="node-badge offline">Offline</span>
+                    </div>
+                    <div class="node-packet-badge" style="font-size: 10px; color: var(--sbi-cerulean); border-top: none; padding-top: 0; margin-bottom: 2px;">
+                        <span>Wallet:</span>
+                        <span style="font-weight: 700; color: var(--sbi-green);" id="wallet-phone-carol">₹2,500.00</span>
                     </div>
                     <div class="node-packet-badge">
                         <span>Mesh Queue</span>
-                        <span class="node-packet-count" id="count-phone-stranger2">0</span>
+                        <span class="node-packet-count" id="count-phone-carol">0</span>
                     </div>
-                    <div class="node-packet-list" id="packets-phone-stranger2"></div>
+                    <div class="node-packet-list" id="packets-phone-carol"></div>
                 </div>
 
-                <!-- phone-stranger3 -->
-                <div class="device-node" id="card-phone-stranger3" style="top: 50%; left: 74%;">
+                <!-- phone-dave -->
+                <div class="device-node" id="card-phone-dave" style="top: 50%; left: 74%;">
                     <div class="node-header">
-                        <span class="node-name">📱 Stranger 3</span>
+                        <span class="node-name">📱 Dave Phone</span>
                         <span class="node-badge offline">Offline</span>
+                    </div>
+                    <div class="node-packet-badge" style="font-size: 10px; color: var(--sbi-cerulean); border-top: none; padding-top: 0; margin-bottom: 2px;">
+                        <span>Wallet:</span>
+                        <span style="font-weight: 700; color: var(--sbi-green);" id="wallet-phone-dave">₹500.00</span>
                     </div>
                     <div class="node-packet-badge">
                         <span>Mesh Queue</span>
-                        <span class="node-packet-count" id="count-phone-stranger3">0</span>
+                        <span class="node-packet-count" id="count-phone-dave">0</span>
                     </div>
-                    <div class="node-packet-list" id="packets-phone-stranger3"></div>
+                    <div class="node-packet-list" id="packets-phone-dave"></div>
                 </div>
 
                 <!-- phone-bridge -->
@@ -1008,11 +1024,11 @@
             line.setAttribute('y2', p2.y);
         };
 
-        drawLine('line-alice-s1', 'card-phone-alice', 'card-phone-stranger1');
-        drawLine('line-alice-s2', 'card-phone-alice', 'card-phone-stranger2');
-        drawLine('line-s1-s3', 'card-phone-stranger1', 'card-phone-stranger3');
-        drawLine('line-s2-s3', 'card-phone-stranger2', 'card-phone-stranger3');
-        drawLine('line-s3-bridge', 'card-phone-stranger3', 'card-phone-bridge');
+        drawLine('line-alice-s1', 'card-phone-alice', 'card-phone-bob');
+        drawLine('line-alice-s2', 'card-phone-alice', 'card-phone-carol');
+        drawLine('line-s1-s3', 'card-phone-bob', 'card-phone-dave');
+        drawLine('line-s2-s3', 'card-phone-carol', 'card-phone-dave');
+        drawLine('line-s3-bridge', 'card-phone-dave', 'card-phone-bridge');
     }
 
     function animatePacket(fromId, toId) {
@@ -1054,7 +1070,7 @@
     // Trigger visual gossip animation along paths
     function triggerGossipVisuals() {
         // Source node highlights
-        const nodes = ['card-phone-alice', 'card-phone-stranger1', 'card-phone-stranger2', 'card-phone-stranger3', 'card-phone-bridge'];
+        const nodes = ['card-phone-alice', 'card-phone-bob', 'card-phone-carol', 'card-phone-dave', 'card-phone-bridge'];
         nodes.forEach(nodeId => {
             const el = document.getElementById(nodeId);
             if (el) {
@@ -1064,16 +1080,16 @@
         });
 
         // Flow directions
-        setTimeout(() => animatePacket('card-phone-alice', 'card-phone-stranger1'), 0);
-        setTimeout(() => animatePacket('card-phone-alice', 'card-phone-stranger2'), 50);
+        setTimeout(() => animatePacket('card-phone-alice', 'card-phone-bob'), 0);
+        setTimeout(() => animatePacket('card-phone-alice', 'card-phone-carol'), 50);
         
         setTimeout(() => {
-            animatePacket('card-phone-stranger1', 'card-phone-stranger3');
-            animatePacket('card-phone-stranger2', 'card-phone-stranger3');
+            animatePacket('card-phone-bob', 'card-phone-dave');
+            animatePacket('card-phone-carol', 'card-phone-dave');
         }, 150);
 
         setTimeout(() => {
-            animatePacket('card-phone-stranger3', 'card-phone-bridge');
+            animatePacket('card-phone-dave', 'card-phone-bridge');
         }, 300);
     }
 
@@ -1084,6 +1100,11 @@
         m.devices.forEach(d => {
             const countEl = document.getElementById(`count-${d.deviceId}`);
             if (countEl) countEl.textContent = d.packetCount;
+
+            const walletEl = document.getElementById(`wallet-${d.deviceId}`);
+            if (walletEl) {
+                walletEl.textContent = `₹${parseFloat(d.localOfflineBalance).toFixed(2)}`;
+            }
 
             const listEl = document.getElementById(`packets-${d.deviceId}`);
             if (listEl) {
@@ -1151,24 +1172,41 @@
     }
 
     async function sendPacket() {
+        const senderVpa = document.getElementById('senderVpa').value;
+        const vpaToDevice = {
+            'alice@demo': 'phone-alice',
+            'bob@demo': 'phone-bob',
+            'carol@demo': 'phone-carol',
+            'dave@demo': 'phone-dave'
+        };
+        const startDevice = vpaToDevice[senderVpa] || 'phone-alice';
+
         const body = {
-            senderVpa: document.getElementById('senderVpa').value,
+            senderVpa: senderVpa,
             receiverVpa: document.getElementById('receiverVpa').value,
             amount: parseFloat(document.getElementById('amount').value),
             pin: document.getElementById('pin').value,
             ttl: 5,
-            startDevice: 'phone-alice'
+            startDevice: startDevice
         };
 
-        const r = await fetch('/api/demo/send', {
+        const res = await fetch('/api/demo/send', {
             method: 'POST', 
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
-        }).then(r => r.json());
+        });
 
+        if (!res.ok) {
+            const err = await res.json();
+            log(`❌ Injection failed: ${err.error}`, 'error');
+            alert(`❌ Injection failed: ${err.error}`);
+            return;
+        }
+
+        const r = await res.json();
         log(`📤 Payment encrypted to mesh packet ${r.packetId.substring(0,8)}`, 'success');
         log(`   Ciphertext: ${r.ciphertextPreview.substring(0, 52)}...`, 'info');
-        log(`   Packet injected into [phone-alice] (TTL: ${r.ttl})`, 'info');
+        log(`   Packet injected into [${r.injectedAt}] (TTL: ${r.ttl})`, 'info');
         
         refresh();
     }
