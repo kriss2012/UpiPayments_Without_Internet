@@ -34,11 +34,15 @@ public class DemoService {
     @PostConstruct
     public void seedAccounts() {
         if (accounts.count() == 0) {
-            accounts.save(new Account("alice@demo", "Alice",   new BigDecimal("5000.00")));
-            accounts.save(new Account("bob@demo",   "Bob",     new BigDecimal("1000.00")));
-            accounts.save(new Account("carol@demo", "Carol",   new BigDecimal("2500.00")));
-            accounts.save(new Account("dave@demo",  "Dave",    new BigDecimal("500.00")));
-            log.info("Seeded 4 demo accounts");
+            try {
+                accounts.save(new Account("alice@demo", "Alice",   new BigDecimal("5000.00"), sha256Hex("1234")));
+                accounts.save(new Account("bob@demo",   "Bob",     new BigDecimal("1000.00"), sha256Hex("2345")));
+                accounts.save(new Account("carol@demo", "Carol",   new BigDecimal("2500.00"), sha256Hex("3456")));
+                accounts.save(new Account("dave@demo",  "Dave",    new BigDecimal("500.00"),  sha256Hex("4567")));
+                log.info("Seeded 4 demo accounts with secure PIN hashes");
+            } catch (Exception e) {
+                log.error("Failed to seed accounts: {}", e.getMessage(), e);
+            }
         }
     }
 
