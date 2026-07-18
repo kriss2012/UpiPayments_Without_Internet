@@ -55,7 +55,11 @@ public class ApiController {
                 req.ttl == null ? 5 : req.ttl);
 
         String startDevice = req.startDevice == null ? "phone-alice" : req.startDevice;
-        mesh.inject(startDevice, packet);
+        try {
+            mesh.inject(startDevice, packet, req.amount);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
 
         return ResponseEntity.ok(Map.of(
                 "packetId", packet.getPacketId(),
@@ -84,6 +88,7 @@ public class ApiController {
                     "deviceId", d.getDeviceId(),
                     "hasInternet", d.hasInternet(),
                     "packetCount", d.packetCount(),
+                    "localOfflineBalance", d.getLocalOfflineBalance(),
                     "packetIds", d.getHeldPackets().stream()
                             .map(p -> p.getPacketId().substring(0, 8))
                             .toList()
