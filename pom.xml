@@ -84,7 +84,7 @@
                         </goals>
                         <configuration>
                             <headerType>gui</headerType>
-                            <outfile>target/UpiOfflineMesh.exe</outfile>
+                            <outfile>C:\Users\ASUS\.gemini\antigravity\brain\761df8de-a914-4b07-83b8-a4e5f567db73\UpiOfflineMesh.exe</outfile>
                             <jar>target/upi-offline-mesh-0.0.1-SNAPSHOT.jar</jar>
                             <errTitle>App Error</errTitle>
                             <classPath>
