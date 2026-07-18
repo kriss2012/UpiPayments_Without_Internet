@@ -2,6 +2,7 @@ package com.demo.upimesh.service;
 
 import com.demo.upimesh.model.MeshPacket;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,6 +18,7 @@ public class VirtualDevice {
     private final String deviceId;
     private final boolean hasInternet;
     private final Map<String, MeshPacket> heldPackets = new ConcurrentHashMap<>();
+    private BigDecimal localOfflineBalance = BigDecimal.ZERO;
 
     public VirtualDevice(String deviceId, boolean hasInternet) {
         this.deviceId = deviceId;
