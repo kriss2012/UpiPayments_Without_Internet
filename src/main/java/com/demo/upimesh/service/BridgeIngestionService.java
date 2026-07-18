@@ -32,6 +32,7 @@ public class BridgeIngestionService {
     @Autowired private HybridCryptoService crypto;
     @Autowired private IdempotencyService idempotency;
     @Autowired private SettlementService settlement;
+    @Autowired private TransactionRepository txRepo;
 
     @Value("${upi.mesh.packet-max-age-seconds:86400}")
     private long maxAgeSeconds;
@@ -41,7 +42,7 @@ public class BridgeIngestionService {
             String packetHash = crypto.hashCiphertext(packet.getCiphertext());
 
             // ---- Idempotency gate ----
-            if (!idempotency.claim(packetHash)) {
+            if (!idempotency.claim(packetHash) || txRepo.existsByPacketHash(packetHash)) {
                 log.info("DUPLICATE packet {} from bridge {} — dropped",
                         packetHash.substring(0, 12) + "...", bridgeNodeId);
                 return IngestResult.duplicate(packetHash);
