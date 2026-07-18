@@ -49,6 +49,12 @@ public class SettlementService {
             throw new IllegalArgumentException("Amount must be positive");
         }
 
+        // ---- PIN Authentication Check ----
+        if (sender.getPinHash() != null && !sender.getPinHash().equalsIgnoreCase(instruction.getPinHash())) {
+            log.warn("AUTHENTICATION FAILED: Invalid PIN for account {}", sender.getVpa());
+            return recordRejected(instruction, packetHash, bridgeNodeId, hopCount);
+        }
+
         if (sender.getBalance().compareTo(amount) < 0) {
             log.warn("Insufficient balance: {} has ₹{}, tried to send ₹{}",
                     sender.getVpa(), sender.getBalance(), amount);
