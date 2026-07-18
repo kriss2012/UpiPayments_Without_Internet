@@ -50,6 +50,10 @@ public class ApiController {
      */
     @PostMapping("/demo/send")
     public ResponseEntity<?> demoSend(@RequestBody DemoSendRequest req) throws Exception {
+        if (req.senderVpa != null && req.senderVpa.equalsIgnoreCase(req.receiverVpa)) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Sender and receiver accounts cannot be the same."));
+        }
+
         MeshPacket packet = demo.createPacket(
                 req.senderVpa, req.receiverVpa, req.amount, req.pin,
                 req.ttl == null ? 5 : req.ttl);
