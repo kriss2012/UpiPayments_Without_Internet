@@ -1173,6 +1173,13 @@
 
     async function sendPacket() {
         const senderVpa = document.getElementById('senderVpa').value;
+        const receiverVpa = document.getElementById('receiverVpa').value;
+        if (senderVpa === receiverVpa) {
+            log(`❌ Validation error: Sender and receiver accounts cannot be the same (${senderVpa})`, 'error');
+            alert(`❌ Validation error: Sender and receiver accounts cannot be the same!`);
+            return;
+        }
+
         const vpaToDevice = {
             'alice@demo': 'phone-alice',
             'bob@demo': 'phone-bob',
