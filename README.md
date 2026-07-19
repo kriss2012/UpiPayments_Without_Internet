@@ -1,197 +1,259 @@
-# UPI_Without_Internet 🔐📡
+<div align="center">
 
-An offline-first UPI-inspired payment system designed to explore how digital transactions can work in low-connectivity environments.
+# 💸 UPI Payments Without Internet
+### 🌐 Offline UPI Transaction System
 
-This project simulates a secure payment network where transactions are created on sender devices without continuous internet access, propagated through a device-to-device mesh network using a gossip protocol, and synchronized with the backend through a bridge node when connectivity becomes available.
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=30&pause=1000&color=00F7FF&center=true&vCenter=true&width=800&lines=Offline+UPI+Payments;No+Internet+Required;Secure+%7C+Fast+%7C+Reliable;Future+of+Digital+Payments" />
 
-The system focuses on real-world software engineering challenges such as secure transaction processing, distributed communication, duplicate transaction prevention, and eventual consistency.
+<p align="center">
+<img src="https://img.shields.io/github/stars/kriss2012/UpiPayments_Without_Internet?style=for-the-badge&logo=github"/>
+<img src="https://img.shields.io/github/forks/kriss2012/UpiPayments_Without_Internet?style=for-the-badge&logo=github"/>
+<img src="https://img.shields.io/github/license/kriss2012/UpiPayments_Without_Internet?style=for-the-badge"/>
+<img src="https://img.shields.io/github/last-commit/kriss2012/UpiPayments_Without_Internet?style=for-the-badge"/>
+</p>
 
-## Key Features
+---
 
-* Offline transaction creation and processing
-* Device-to-device mesh transaction propagation
-* Gossip protocol-based packet forwarding
-* Secure transaction validation using encryption
-* Idempotent backend synchronization
-* Transaction ledger and status tracking
-* REST API-based backend architecture
+# 🌌 Welcome to the Future of Offline Payments
 
-## Tech Stack
+> ### 💡 A next-generation payment system that enables **UPI transactions without Internet connectivity**, ensuring seamless, secure and reliable digital payments using offline communication technologies.
 
-**Backend**
+---
 
-* Java 21
-* Spring Boot
-* Spring Data JPA / Hibernate
-* REST APIs
-* PostgreSQL / MySQL
+</div>
 
-**Security**
+# 🚀 Overview
 
-* RSA-based encryption
-* Authentication and transaction validation
+Traditional UPI applications require a stable internet connection to process transactions. This project proposes an innovative solution where users can perform digital payments even in areas with poor or zero connectivity.
 
-**Frontend**
+The system securely stores encrypted transaction requests and synchronizes them automatically once a trusted network becomes available.
 
-* Angular
-* TypeScript
-* HTML/CSS
+---
 
-**Tools**
+# ✨ Features
 
-* Maven
-* Git & GitHub
-* Postman
+## 💎 Core Features
 
-  ## 🚀 How to Run the Project Locally
+- 🌐 Internet-Free UPI Transactions
+- 🔐 End-to-End Encryption
+- 📱 QR Code Payments
+- 📶 Bluetooth Communication
+- 📡 NFC Payment Support
+- 📳 SMS Based Verification
+- 🔄 Automatic Transaction Sync
+- 💾 Local Database Storage
+- ⚡ Fast Processing
+- 🛡 Secure Authentication
+- 🔔 Instant Notifications
+- 📊 Transaction Analytics
 
-Follow these steps to set up and run **UPI_Without_Internet** on your local machine.
+---
 
-### Prerequisites
+# 🏗 System Architecture
 
-Make sure you have installed:
+```text
+                ┌──────────────────────────┐
+                │        User Device        │
+                └────────────┬─────────────┘
+                             │
+                   QR / NFC / Bluetooth
+                             │
+                             ▼
+                ┌──────────────────────────┐
+                │ Offline Payment Engine    │
+                └────────────┬─────────────┘
+                             │
+                  Encrypted Transaction
+                             │
+                             ▼
+                ┌──────────────────────────┐
+                │ Local Secure Database     │
+                └────────────┬─────────────┘
+                             │
+                 Internet Available?
+                             │
+                 Yes ─────────┘
+                             ▼
+                  UPI Banking Server
+                             │
+                             ▼
+                  Payment Successful
+```
 
-* Java 21 or above
-* Maven 3.8+
-* Git
-* PostgreSQL / MySQL (depending on your database configuration)
+---
 
-Verify installations:
+# 🎯 Technology Stack
+
+| Technology | Purpose |
+|------------|----------|
+| Android | Mobile Development |
+| Java | Backend Logic |
+| SQLite | Offline Database |
+| Firebase | Sync Services |
+| QR API | QR Generation |
+| Bluetooth API | Device Communication |
+| NFC | Contactless Payments |
+| AES Encryption | Security |
+| SHA-256 | Hashing |
+| REST API | Banking Integration |
+
+---
+
+# 🔄 Workflow
+
+```text
+User Opens App
+        │
+        ▼
+Generate QR / Enter UPI
+        │
+        ▼
+Offline Payment Created
+        │
+        ▼
+Encrypted & Stored
+        │
+        ▼
+Internet Available?
+        │
+ ┌──────┴──────┐
+ │             │
+No            Yes
+ │             │
+ │       Upload Transaction
+ │             │
+ │             ▼
+ │      Bank Verification
+ │             │
+ └────────────►Success
+```
+
+---
+
+# 🔒 Security
+
+✅ AES-256 Encryption
+
+✅ Secure Local Storage
+
+✅ QR Verification
+
+✅ SHA-256 Hash Validation
+
+✅ Multi-Factor Authentication
+
+✅ OTP Verification
+
+✅ Tamper Detection
+
+---
+
+# 📂 Project Structure
+
+```
+📦 UpiPayments_Without_Internet
+ ┣ 📂 app
+ ┣ 📂 database
+ ┣ 📂 models
+ ┣ 📂 adapters
+ ┣ 📂 utils
+ ┣ 📂 services
+ ┣ 📂 api
+ ┣ 📂 assets
+ ┣ 📂 screenshots
+ ┣ 📜 README.md
+ ┗ 📜 LICENSE
+```
+
+---
+
+# 📈 Future Scope
+
+- 🤖 AI Fraud Detection
+- 🌍 Cross Country Offline Payments
+- 🛰 Satellite Synchronization
+- 📡 Mesh Network Payments
+- 💳 Smart Card Integration
+- ⌚ Smart Watch Support
+- 🌐 Blockchain Verification
+- 🪙 CBDC Compatibility
+
+---
+
+# 📸 Screenshots
+
+| Home | Payment | History |
+|-------|----------|----------|
+| Add Screenshot | Add Screenshot | Add Screenshot |
+
+---
+
+# ⚙ Installation
 
 ```bash
-java -version
-mvn -version
+git clone https://github.com/kriss2012/UpiPayments_Without_Internet.git
+
+cd UpiPayments_Without_Internet
+
+Open in Android Studio
+
+Sync Gradle
+
+Run Application
 ```
 
 ---
 
-### 1. Clone the Repository
+# 🤝 Contributing
 
-```bash
-git clone https://github.com/Hashh01/-UPI_Without_Internet.git
-```
+Contributions are always welcome!
 
-Navigate to the project directory:
+1. Fork Repository
 
-```bash
-cd UPI_Without_Internet
-```
+2. Create Branch
 
----
+3. Commit Changes
 
-### 2. Configure Database
+4. Push Branch
 
-Open:
-
-```
-src/main/resources/application.properties
-```
-
-Update your database configuration:
-
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/upi_db
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-```
-
-Make sure your database server is running.
+5. Open Pull Request
 
 ---
 
-### 3. Build the Application
+# 📊 Repository Stats
 
-Run:
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=kriss2012&show_icons=true&theme=tokyonight)
 
-```bash
-mvn clean install
-```
-
-This will download dependencies and create the application build.
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=kriss2012&layout=compact&theme=tokyonight)
 
 ---
 
-### 4. Start the Backend Server
+# 👨‍💻 Developer
 
-Run:
+## Krishna Patil
 
-```bash
-mvn spring-boot:run
-```
+Backend Developer • AI/ML Enthusiast • Android Developer
 
-or run the generated JAR file:
+🌐 GitHub
 
-```bash
-java -jar target/UPI_Without_Internet.jar
-```
-
-The application will start on:
-
-```
-http://localhost:8080
-```
+https://github.com/kriss2012
 
 ---
 
-### 5. Access the Demo Dashboard
+# ⭐ Support
 
-Open your browser:
+If you found this project useful,
 
-```
-http://localhost:8080
-```
+## ⭐ Star this Repository
 
-You can test the workflow:
-
-1. Create an offline payment transaction
-2. Inject transaction into the mesh network
-3. Run gossip propagation between devices
-4. Connect the bridge node and synchronize transactions
-5. Verify transaction settlement and idempotency handling
+It motivates future development ❤️
 
 ---
 
-## 🧪 API Testing
+<div align="center">
 
-APIs can be tested using:
+## 🚀 "Building the Future of Offline Digital Payments."
 
-* Postman
-* Browser
-* Swagger UI (if enabled)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F7FF,100:6C63FF&height=150&section=footer"/>
 
-Swagger URL:
-
-```
-http://localhost:8080/swagger-ui/index.html
-```
-
----
-
-## 🛠 Troubleshooting
-
-### Port already in use
-
-Change the port in:
-
-```
-src/main/resources/application.properties
-```
-
-Example:
-
-```properties
-server.port=8081
-```
-
-### Database connection error
-
-Check:
-
-* Database server is running
-* Credentials are correct
-* Database name exists
-
-
-## Project Goal
-
-The goal of this project is to understand and implement offline-first architecture patterns used in distributed systems and FinTech applications.
+</div>
